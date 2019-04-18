@@ -10,11 +10,31 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var selectData: UILabel!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    let format = DateFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let locale = Locale(identifier: "ko-KO")
+        
+        datePicker.locale = locale
+        datePicker.datePickerMode = UIDatePicker.Mode.date
+
+        writeDate()
     }
 
 
+    @IBAction func datePickerCheck(_ sender: Any) {
+        writeDate()
+    }
+    
+    func writeDate() {
+        format.dateFormat = "yyyy-MM-dd HH:mm EEE"
+        
+        selectData.text = format.string(from: datePicker.date)
+    }
 }
 
